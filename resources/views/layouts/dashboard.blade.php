@@ -178,7 +178,7 @@
                     <button class="navbar-profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" id="profile-dropdown">
                         <img src="/storage/assets/images/avatar.png" alt="Profile Image" class="navbar-profile-img">
-                        <span class="navbar-profile-name d-none d-md-inline">Administrator</span>
+                        <span class="navbar-profile-name d-none d-md-inline text-capitalize">{{str_replace('_',' ',auth()->user()->role)}}</span>
                         <i class="bi bi-chevron-down navbar-profile-caret"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile" aria-labelledby="profile-dropdown">
