@@ -18,13 +18,15 @@ Route::controller(StoreController::class)->group(function () {
     Route::post('/checkout',  'placeOrder')->name('store.checkout.place');
     Route::get('/order/{order}/complete',  'complete')->name('store.complete');
 });
-Route::middleware('auth')->controller(ProductDocumentController::class)->group(function () {
-    Route::get('/products/document', 'index')->name('document.index');
-    Route::get('/products/document/create', 'create')->name('document.create');
-    Route::post('/products/document', 'store')->name('document.store');
+Route::middleware(['auth','verified'])->group(function () {
+    Route::controller(ProductDocumentController::class)->group(function () {
+        Route::get('/products/document', 'index')->name('document.index');
+        Route::get('/products/document/create', 'create')->name('document.create');
+        Route::post('/products/document', 'store')->name('document.store');
+    });
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
 });
 
-Auth::routes();
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/dashboard', 'index')->name('dashboard');
-});
+Auth::routes(['register' => false]);
